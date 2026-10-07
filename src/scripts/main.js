@@ -3,12 +3,14 @@
  */
 import ThemeManager from './theme.js';
 import { authService } from '../services/auth.js';
+import { Toast } from '../utils/toast.js';
+
+// Attach Toast to window for easy access in inline HTML scripts
+window.Toast = Toast;
 
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize Theme manager
   ThemeManager.init();
   
-  // Setup Mobile Menu Toggle
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   
@@ -18,34 +20,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Setup Auth UI states (Dashboard link hiding/showing)
-  const updateAuthUI = () => {
-    const isLoggedIn = authService.isLoggedIn();
+  const updateAuthUI = (isLoggedIn) => {
+    // Determine login from argument, or fallback to instant synchronous request.
+    const logged = isLoggedIn !== undefined ? isLoggedIn : authService.isLoggedIn();
     
-    // Toggle Dashboard links
     document.querySelectorAll('.auth-required').forEach(el => {
-      if (isLoggedIn) {
-        el.classList.remove('hidden');
-      } else {
-        el.classList.add('hidden');
-      }
+      if (logged) el.classList.remove('hidden');
+      else el.classList.add('hidden');
     });
 
-    // Toggle Login links
     document.querySelectorAll('.guest-only').forEach(el => {
-      if (!isLoggedIn) {
-        el.classList.remove('hidden');
-      } else {
-        el.classList.add('hidden');
-      }
+      if (!logged) el.classList.remove('hidden');
+      else el.classList.add('hidden');
     });
   };
 
-  // Run on mount
+  // Initial Sync check
   updateAuthUI();
 
-  // Listen to auth changes
-  document.addEventListener('auth-status-changed', updateAuthUI);
+  // Async exact check (good for when navigating after tokens change)
+  authService.getSessionAsync().then(({ session }) => {
+    updateAuthUI(!!session);
+  });
+
+  // Listener for dynamic changes over time
+  document.addEventListener('auth-status-changed', (e) => {
+    updateAuthUI(e.detail.isLoggedIn);
+  });
   
   console.log('Siraj Educational Platform Initialized');
 });

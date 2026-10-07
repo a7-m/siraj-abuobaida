@@ -1,28 +1,25 @@
 /**
- * Placeholder for Supabase logic.
- * No real API keys or sensitive data here yet.
- * Used to demonstrate separation of data logic from UI.
+ * Supabase SDK Initialization using ES Modules from CDN
  */
 
-// import { createClient } from '@supabase/supabase-js'
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
+// The USER should replace these placeholders with real keys later.
 const SUPABASE_URL = 'PLACEHOLDER_URL';
 const SUPABASE_KEY = 'PLACEHOLDER_KEY';
 
-class SupabaseService {
-  constructor() {
-    // this.client = createClient(SUPABASE_URL, SUPABASE_KEY);
-    this.isInitialized = true;
-    console.log('Supabase service placeholder ready.');
-  }
+// Only create a client if keys are provided, else create a dummy object to prevent instant crashes 
+// when keys are just Placeholders.
+let supabaseClient = null;
 
-  // Example placeholder function
-  async getEncyclopediaData() {
-    // return await this.client.from('encyclopedia').select('*');
-    return Promise.resolve([
-      { id: 1, title: 'Dummy Data', description: 'This will load from Supabase later.' }
-    ]);
+try {
+  if (SUPABASE_URL.startsWith('http')) {
+    supabaseClient = createClient(SUPABASE_URL, SUPABASE_KEY);
+  } else {
+    console.warn('⚠️ Supabase Keys are placeholders. Supabase connection is disabled. Replace them in User settings.');
   }
+} catch (e) {
+  console.error('Supabase Initialization Error:', e);
 }
 
-export const supabaseService = new SupabaseService();
+export const supabase = supabaseClient;

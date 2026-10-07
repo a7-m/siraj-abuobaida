@@ -52,7 +52,7 @@
     <button onclick="window.mockLogout()" class="btn btn-outline" style="margin-top: 1rem; text-align: center;">تسجيل خروج</button>
   </div>
 
-  <main class="main-content container">
+  <main id="auth-content" class="main-content container" style="opacity: 0; transition: opacity 0.3s ease;">
     <div class="flex justify-between items-center" style="margin-bottom: 2rem;">
       <h2>مرحباً، طالب مجتهد 👋</h2>
       <span style="background: var(--color-gold); color: white; padding: 0.25rem 1rem; border-radius: 20px; font-weight: 600;">120 نقطة</span>
@@ -120,15 +120,27 @@
     import { authService } from './src/services/auth.js';
     import './src/scripts/main.js';
 
-    // Protect Route
-    if (!authService.isLoggedIn()) {
-      window.location.href = 'login.html';
-    }
+    // Route Protection
+    authService.getSessionAsync().then(({ session }) => {
+      if (!session) {
+        // If not logged in, redirect immediately without showing dashboard content
+        window.location.replace('login.html');
+      } else {
+        // Reveal content
+        document.getElementById('auth-content').style.opacity = '1';
+        // Mock user details or pull from session.user.email
+        // document.getElementById('user-welcome').innerText = session.user.email;
+      }
+    });
 
-    // Attach mock logout
+    // Attach global mock logout
     window.mockLogout = async () => {
-      await authService.logout();
-      window.location.href = 'index.html';
+      try {
+        await authService.logout();
+        window.location.href = 'index.html';
+      } catch (err) {
+        console.error(err);
+      }
     };
   </script>
 </body>
