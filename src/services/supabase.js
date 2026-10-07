@@ -4,9 +4,9 @@
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm';
 
-// The USER should replace these placeholders with real keys later.
-const SUPABASE_URL = 'PLACEHOLDER_URL';
-const SUPABASE_KEY = 'PLACEHOLDER_KEY';
+// Real Supabase Keys
+const SUPABASE_URL = 'https://pqpbvhaaarpctxifsddh.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBxcGJ2aGFhYXJwY3R4aWZzZGRoIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTEzNzQ2MzUsImV4cCI6MjEwNjk1MDYzNX0.59MDrlgpsoPu5VhJr5wye7fvej4KV89CO2kqGTT_384';
 
 // Only create a client if keys are provided, else create a dummy object to prevent instant crashes 
 // when keys are just Placeholders.
