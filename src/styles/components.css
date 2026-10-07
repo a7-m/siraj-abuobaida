@@ -154,11 +154,59 @@
   margin-top: auto;
 }
 
-/* Mobile Responsive */
-@media (max-width: 768px) {
+/* Mobile Responsive Header & Navigation */
+.hamburger {
+  display: none;
+  background: transparent;
+  border: none;
+  color: var(--color-text);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  z-index: 60;
+}
+
+.mobile-menu-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background-color: var(--color-bg);
+  z-index: 55;
+  padding: 6rem 2rem 2rem;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.mobile-menu-overlay.active {
+  display: flex;
+}
+
+@media (max-width: 900px) {
   .nav-links {
-    display: none; /* Hide for mobile, will need a hamburger later if requested */
+    display: none; 
   }
   
-  /* We can add a simple mobile nav pattern here later */
+  .hamburger {
+    display: block;
+  }
+  
+  .d-none-mobile {
+    display: none;
+  }
+}
+
+.mobile-nav-link {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-border);
+  padding-bottom: 0.5rem;
+}
+
+.mobile-nav-link.active {
+  color: var(--color-accent);
+}
+
+.hidden {
+  display: none !important;
 }
