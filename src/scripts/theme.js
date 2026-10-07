@@ -1,6 +1,7 @@
 /**
  * Theme Management Tool
  * Handles Light/Dark mode transitions, system preferences, and local storage persistence.
+ * Olive Modern Theme — Siraj Educational Platform
  */
 
 const ThemeManager = {
@@ -52,8 +53,16 @@ const ThemeManager = {
     const isDark = document.documentElement.hasAttribute("data-theme");
     const newTheme = isDark ? "light" : "dark";
 
+    // Add transition class for smooth theme switch
+    document.body.classList.add("theme-transitioning");
+
     this.setTheme(newTheme);
     localStorage.setItem("siraj-theme", newTheme);
+
+    // Remove transition class after animation completes
+    setTimeout(() => {
+      document.body.classList.remove("theme-transitioning");
+    }, 600);
   },
 
   updateToggleButtonIcon(theme) {

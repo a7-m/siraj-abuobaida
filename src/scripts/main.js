@@ -4,12 +4,14 @@
 import ThemeManager from './theme.js';
 import { authService } from '../services/auth.js';
 import { Toast } from '../utils/toast.js';
+import { initDotGrid } from './dotgrid.js';
 
 // Attach Toast to window for easy access in inline HTML scripts
 window.Toast = Toast;
 
 document.addEventListener('DOMContentLoaded', () => {
   ThemeManager.init();
+  initDotGrid();
   
   const hamburgerBtn = document.getElementById('hamburger-btn');
   const mobileMenu = document.getElementById('mobile-menu');
@@ -48,5 +50,39 @@ document.addEventListener('DOMContentLoaded', () => {
     updateAuthUI(e.detail.isLoggedIn);
   });
   
+  // ── Scroll Reveal Observer ──
+  const revealElements = document.querySelectorAll(
+    '.main-content .card, .main-content .empty-state, .main-content section, .main-content h2, .main-content h3, .main-content form'
+  );
+  
+  if (revealElements.length > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    // Add scroll-reveal class to eligible elements
+    revealElements.forEach(el => {
+      if (!el.dataset.revealed) {
+        el.classList.add('scroll-reveal');
+      }
+    });
+
+    // Add stagger class to grids
+    document.querySelectorAll('.main-content .grid').forEach(grid => {
+      grid.classList.add('scroll-reveal-stagger');
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          entry.target.dataset.revealed = 'true';
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    revealElements.forEach(el => observer.observe(el));
+  }
+
   console.log('Siraj Educational Platform Initialized');
 });

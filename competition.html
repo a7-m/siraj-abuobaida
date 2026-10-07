@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="./src/styles/global.css">
   <link rel="stylesheet" href="./src/styles/layout.css">
   <link rel="stylesheet" href="./src/styles/components.css">
+  <link rel="stylesheet" href="./src/styles/dotgrid.css">
   <script>
     (function () {
       const savedTheme = localStorage.getItem('siraj-theme');
@@ -63,13 +64,67 @@
       <p style="color: var(--color-text-muted);">مسابقات مؤقتة وتحديات دورية لإثراء المعرفة.</p>
     </div>
 
-    <!-- Empty State for Competitions -->
-    <section class="empty-state" style="margin-bottom: 4rem;">
-      <div class="empty-state-icon" style="font-size: 3.5rem; margin-bottom: 1rem; color: var(--color-gold);">🏆</div>
-      <h3 style="margin-bottom: 0.5rem;">لا توجد مسابقات حالياً</h3>
-      <p style="color: var(--color-text-muted); max-width: 500px; margin: 0 auto;">
-        سيتم إطلاق مسابقات جديدة وتحديات دورية قريباً. ترقبوا الإعلانات وكونوا على استعداد لإثبات مهاراتكم!
-      </p>
+    <!-- Active Competition (جارية) -->
+    <section style="margin-bottom: 4rem;">
+      <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span style="width: 12px; height: 12px; background-color: #28a745; border-radius: 50%; display: inline-block;"></span>
+        مسابقات جارية
+      </h3>
+      <div class="grid grid-2">
+        <!-- Placeholder Card -->
+        <div class="card flex flex-col">
+          <div style="background-color: var(--color-border); height: 150px; border-radius: var(--border-radius); margin-bottom: 1rem; display:flex; align-items:center; justify-content:center;">صورة المسابقة (Placeholder)</div>
+          <h4 style="margin-bottom: 0.5rem;">أسئلة الذكاء العام</h4>
+          <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1rem; flex-grow: 1;">مسابقة تختبر المعرفة العامة والربط السريع بين المعلومات.</p>
+          
+          <div style="background-color: var(--color-bg); padding: 1rem; border-radius: var(--border-radius); font-size: 0.85rem; margin-bottom: 1rem;">
+            <div class="flex justify-between" style="margin-bottom: 0.5rem;"><span>البداية:</span> <span>10 أكتوبر 2026</span></div>
+            <div class="flex justify-between" style="margin-bottom: 0.5rem;"><span>النهاية:</span> <span>20 أكتوبر 2026</span></div>
+            <div class="flex justify-between" style="margin-bottom: 0.5rem;"><span>الوقت المتاح:</span> <span>30 دقيقة</span></div>
+            <div class="flex justify-between"><span>الأسئلة:</span> <span>20 سؤال</span></div>
+          </div>
+          
+          <button class="btn btn-primary" style="width: 100%;">شارك الآن</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Upcoming Competition (قادمة) -->
+    <section style="margin-bottom: 4rem;">
+      <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span style="width: 12px; height: 12px; background-color: var(--color-gold); border-radius: 50%; display: inline-block;"></span>
+        مسابقات قادمة
+      </h3>
+      <div class="grid grid-2">
+        <div class="card flex flex-col">
+          <h4 style="margin-bottom: 0.5rem;">أعلام من عمان</h4>
+          <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1rem; flex-grow: 1;">المسابقة الشهرية الخاصة بالتعريف بالشخصيات التاريخية العمانية.</p>
+          <div style="background-color: var(--color-bg); padding: 1rem; border-radius: var(--border-radius); font-size: 0.85rem; margin-bottom: 1rem;">
+            <div class="flex justify-between" style="margin-bottom: 0.5rem;"><span>تاريخ الانطلاق:</span> <span>1 نوفمبر 2026</span></div>
+          </div>
+          <button class="btn btn-outline" style="width: 100%; pointer-events: none;">قادمة قريباً</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Finished Competition (منتهية) -->
+    <section>
+      <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        <span style="width: 12px; height: 12px; background-color: var(--color-text-muted); border-radius: 50%; display: inline-block;"></span>
+        مسابقات منتهية
+      </h3>
+      <div class="grid grid-2">
+        <div class="card flex flex-col">
+          <h4 style="margin-bottom: 0.5rem; color: var(--color-text-muted);">مسابقة اليوم الوطني</h4>
+          <p style="font-size: 0.9rem; color: var(--color-text-muted); margin-bottom: 1rem; flex-grow: 1;">مسابقة الاحتفال باليوم الوطني العماني.</p>
+          <div style="border: 1px dashed var(--color-border); padding: 1rem; border-radius: var(--border-radius); font-size: 0.85rem; margin-bottom: 1rem;">
+            <div class="flex justify-between" style="margin-bottom: 0.5rem;"><span>حالة المسابقة:</span> <span style="font-weight:bold;">منتهية</span></div>
+            <div class="flex justify-between" style="margin-bottom: 0.5rem;"><span>الدرجة النهائية:</span> <span>- / 100</span></div>
+            <div class="flex justify-between"><span>النتائج:</span> <span>غير متوفرة</span></div>
+          </div>
+          <button class="btn" style="width: 100%; background-color: var(--color-border); color: var(--color-text-muted); cursor: not-allowed;">عرض التفاصيل</button>
+        </div>
+      </div>
     </section>
 
   </main>

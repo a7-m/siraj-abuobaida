@@ -1,5 +1,6 @@
 /**
  * Layout System
+ * Siraj Educational Platform — Olive Modern Theme
  */
 
 .container {
@@ -10,7 +11,7 @@
 }
 
 .main-content {
-  padding: 4rem 0;
+  padding: var(--space-3xl) 0;
   min-height: calc(100vh - 160px); /* header and footer approx height */
   display: flex;
   flex-direction: column;
@@ -37,10 +38,31 @@
 /* Flex Utilities */
 .flex { display: flex; }
 .flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
 .items-center { align-items: center; }
+.items-start { align-items: flex-start; }
 .justify-between { justify-content: space-between; }
 .justify-center { justify-content: center; }
 .gap-1 { gap: 0.5rem; }
 .gap-2 { gap: 1rem; }
 .gap-3 { gap: 1.5rem; }
 .gap-4 { gap: 2rem; }
+
+/* Text Utilities */
+.text-center { text-align: center; }
+.text-muted { color: var(--color-text-muted); }
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .main-content {
+    padding: var(--space-xl) 0;
+  }
+
+  .grid {
+    gap: 1.25rem;
+  }
+}
