@@ -94,42 +94,18 @@
       </div>
     </div>
 
-    <!-- Upload Form Stub -->
-    <section class="card" style="max-width: 800px; margin: 0 auto; opacity: 0.8;">
-      <h3 style="margin-bottom: 1.5rem; text-align: center;">رفع البحث (Mock UI)</h3>
-      <form class="flex flex-col gap-3" onsubmit="event.preventDefault();">
-        <div class="grid grid-2">
-          <div class="flex flex-col gap-1">
-            <label style="font-weight: bold; font-size: 0.9rem;">اسم الطالب</label>
-            <input type="text" placeholder="الاسم الكامل" style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-bg); color: var(--color-text);" disabled>
-          </div>
-          <div class="flex flex-col gap-1">
-            <label style="font-weight: bold; font-size: 0.9rem;">الصف</label>
-            <select style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-bg); color: var(--color-text);" disabled>
-              <option>اختر الصف...</option>
-            </select>
-          </div>
-        </div>
-
-        <div class="flex flex-col gap-1">
-          <label style="font-weight: bold; font-size: 0.9rem;">عنوان البحث</label>
-          <input type="text" placeholder="أدخل عنوان بحثك..." style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-bg); color: var(--color-text);" disabled>
-        </div>
-
-        <div class="flex flex-col gap-1">
-          <label style="font-weight: bold; font-size: 0.9rem;">ملخص البحث</label>
-          <textarea rows="4" placeholder="اكتب نبذة مختصرة عن فكرة البحث..." style="padding: 0.75rem; border: 1px solid var(--color-border); border-radius: var(--border-radius); background: var(--color-bg); color: var(--color-text); font-family: inherit;" disabled></textarea>
-        </div>
-
-        <div class="flex flex-col gap-1">
-          <label style="font-weight: bold; font-size: 0.9rem;">ملف البحث (PDF أو Word)</label>
-          <div style="border: 2px dashed var(--color-border); padding: 2rem; text-align: center; border-radius: var(--border-radius); background-color: var(--color-bg); color: var(--color-text-muted);">
-            اسحب وأفلت الملف هنا أو <span style="color: var(--color-accent); text-decoration: underline;">اختر ملف</span> (قريباً للمسجلين)
-          </div>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="margin-top: 1rem; width: 100%; cursor: not-allowed;" disabled>إرسال البحث</button>
-      </form>
+    <!-- Empty State for Upload -->
+    <section class="empty-state auth-required hidden" style="margin-top: 2rem;">
+      <div class="empty-state-icon" style="font-size: 3rem; margin-bottom: 1rem; color: var(--color-gold);">🔬</div>
+      <h3 style="margin-bottom: 0.5rem;">لا توجد خطة بحثية متاحة للتسجيل حالياً</h3>
+      <p style="color: var(--color-text-muted); max-width: 500px; margin: 0 auto;">
+        عُد قريباً عند فتح باب التسجيل للأبحاث العلمية. بإمكانك تجهيز فكرتك من الآن!
+      </p>
+    </section>
+    
+    <section class="empty-state guest-only" style="margin-top: 2rem; background: transparent; border: 1px dashed var(--color-border);">
+      <p style="color: var(--color-text-muted); margin-bottom: 1rem;">يرجى تسجيل الدخول للتمكن من رفع الأبحاث العلمية</p>
+      <a href="login.html" class="btn btn-primary" style="display: inline-block;">تسجيل الدخول</a>
     </section>
 
   </main>

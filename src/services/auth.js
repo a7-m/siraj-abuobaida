@@ -38,6 +38,26 @@ class AuthService {
     return data;
   }
 
+  async signup(email, password, userData) {
+    if (!supabase) throw new Error('Supabase Configuration is missing.');
+    
+    // Pass custom metadata so the Postgres trigger handles profile creation
+    const { data, error } = await supabase.auth.signUp({
+      email,
+      password,
+      options: {
+        data: {
+          full_name: userData.fullName,
+          grade: userData.grade,
+          section: userData.section
+        }
+      }
+    });
+
+    if (error) throw error;
+    return data;
+  }
+
   async login(email, password) {
     if (!supabase) {
       throw new Error('Supabase Configuration is missing. Please add URL and KEY.');
@@ -48,6 +68,37 @@ class AuthService {
       password
     });
     
+    if (error) throw error;
+    return data;
+  }
+
+  async loginWithGoogle() {
+    if (!supabase) throw new Error('Supabase Configuration is missing.');
+    // Initiates Google OAuth. Redirects natively.
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+      options: {
+        redirectTo: `${window.location.origin}/dashboard.html`
+      }
+    });
+    if (error) throw error;
+    return data;
+  }
+
+  async sendPasswordResetEmail(email) {
+    if (!supabase) throw new Error('Supabase Configuration is missing.');
+    const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: `${window.location.origin}/reset-password.html`
+    });
+    if (error) throw error;
+    return data;
+  }
+
+  async updatePassword(newPassword) {
+    if (!supabase) throw new Error('Supabase Configuration is missing.');
+    const { data, error } = await supabase.auth.updateUser({
+      password: newPassword
+    });
     if (error) throw error;
     return data;
   }
